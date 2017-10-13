@@ -27,9 +27,9 @@ if __name__ == "__main__":
         print(helpText)
         sys.exit(-1)
     else:
-        mdssURL = sys.argv[0]
-        user = sys.argv[1]
-        password = sys.argv[2]
+        mdssURL = sys.argv[1]
+        user = sys.argv[2]
+        password = sys.argv[3]
 
     # Initialize Spark
     spark = SparkSession \
