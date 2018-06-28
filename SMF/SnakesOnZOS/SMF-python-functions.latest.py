@@ -30,7 +30,7 @@ import dsdbc
 
 #Retrieve credentials to access ODL server
 def get_credentials():
-    with open('/u/user/python/user_info.txt') as f:
+    with open('/u/userid/python/user_info.txt') as f:
         user = f.readline().rstrip()
         password = f.readline().rstrip()
     return user, password
@@ -55,7 +55,7 @@ cursor = conn.cursor()
 
 #Load full input dataset name file
 def get_file():
-    with open('/u/user/python/data_file.txt') as f:
+    with open('/u/userid/python/data_file.txt') as f:
         dataset_name= f.readline().rstrip()
     return dataset_name
 dataset_name= get_file()
