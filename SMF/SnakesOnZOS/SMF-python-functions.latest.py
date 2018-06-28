@@ -4,7 +4,7 @@
 # <h1>A Hands-On Lab for the System Programmer</h1>
 # <ul>
 #     <li>You need to catch a run-away job that is generating SMF records and filling our logstream!</li>
-#     <li>SYSLOG isn·t helpful, we need to do some ad-hoc processing of SMF records to figure this out.</li>
+#     <li>SYSLOG isn√°t helpful, we need to do some ad-hoc processing of SMF records to figure this out.</li>
 # </ul>
 
 # In[1]:
@@ -30,7 +30,7 @@ import dsdbc
 
 #Retrieve credentials to access ODL server
 def get_credentials():
-    with open('/u/neils/python/user_info.txt') as f:
+    with open('/u/user/python/user_info.txt') as f:
         user = f.readline().rstrip()
         password = f.readline().rstrip()
     return user, password
@@ -55,7 +55,7 @@ cursor = conn.cursor()
 
 #Load full input dataset name file
 def get_file():
-    with open('/u/neils/python/data_file.txt') as f:
+    with open('/u/user/python/data_file.txt') as f:
         dataset_name= f.readline().rstrip()
     return dataset_name
 dataset_name= get_file()
