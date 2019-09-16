@@ -1,35 +1,28 @@
-# IBM z Open Data Analytics (IzODA)
+# Anaconda and PySpark
 # Installation Verification Program (IVP)
-# Copyright IBM 2017
-
-# izodaIVP.py
-# Last updated 10/12/2017
+# Copyright IBM 2017, 2019
+# anaconda-pyspark-ivp.py
 #
 # Simple analysis on a VSAM file
-# VSAM file contains Client Retention Demo
 
 import sys
 from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField
-from pyspark.sql.types import DoubleType, IntegerType, StringType
 import pandas
 
 helpText = \
     '''
     Usage:
-        spark-submit anaconda-pyspark-ivp.py [mdsURL] [user] [password]
+        spark-submit anaconda-pyspark-ivp.py [mdsURL]
     '''
 
 if __name__ == "__main__":
 
     # Check and process parameters
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 2:
         print(helpText)
         sys.exit(-1)
     else:
         mdssURL = sys.argv[1]
-        user = sys.argv[2]
-        password = sys.argv[3]
 
     # Initialize Spark
     spark = SparkSession \
@@ -40,27 +33,27 @@ if __name__ == "__main__":
         
 
     # Read MDSS Client Retention VSAM file and place that data into a dataframe
-    clientIncomeDF = spark.read \
+    StaffDF = spark.read \
         .format("jdbc") \
         .option("driver", "com.rs.jdbc.dv.DvDriver") \
         .option("url", mdssURL) \
-        .option("dbtable", "CLIENT_RETN") \
-        .option("user", user) \
-        .option("password", password) \
+        .option("dbtable", "STAFFVS") \
+        .option("user", "") \
+        .option("password", "") \
         .load()
 
     # Group dataframe values by education level
     # Aggregate values on multiple columns
-    avgByEducationDF = clientIncomeDF \
-        .groupBy("HIGHEST_EDU") \
-        .avg("AGE_YEARS", "ANNUAL_INVEST", "ANNUAL_INCOME") \
-        .orderBy("HIGHEST_EDU")
+    avgByDeptDF = StaffDF \
+	.groupBy("STAFFVS_DATA_DEPT") \
+        .avg("STAFFVS_DATA_YRS","STAFFVS_DATA_NAME_L") \
+	.orderBy("STAFFVS_DATA_DEPT")
 
     # Print all results
-    avgByEducationDF.show(avgByEducationDF.count())
+    avgByDeptDF.show()
     
     # Convert Spark dataframe to pandas dataframe and transpose
-    print(avgByEducationDF.toPandas().transpose())
+    print(avgByDeptDF.toPandas().transpose())
 
     # Stop Spark Session
     spark.stop()
