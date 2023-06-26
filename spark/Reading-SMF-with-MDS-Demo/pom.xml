@@ -28,10 +28,10 @@
 			<artifactId>spark-sql_2.11</artifactId>
 			<version>2.4.8</version>
 		</dependency>
-    	<dependency>
-		<groupId>com.rs.jdbc.dv</groupId>
-		<artifactId>dv-jdbc-3.1.202201120442</artifactId>
-		<version>3.1.202201120442</version>
+		<dependency>
+			<groupId>com.rs.jdbc.dv</groupId>
+			<artifactId>dv-jdbc-3.1.202201120442</artifactId>
+			<version>3.1.202201120442</version>
 		</dependency> 
 		<dependency>
 			<groupId>org.apache.logging.log4j.log4j-api</groupId>
